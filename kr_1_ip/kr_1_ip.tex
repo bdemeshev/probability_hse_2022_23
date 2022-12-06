@@ -1,0 +1,242 @@
+% arara: xelatex
+
+\documentclass[12pt]{article} % размер шрифта
+
+\usepackage{etex} % extend
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{diagbox}
+\usepackage{slashbox}
+\usepackage{tabularx}
+\usepackage{comment}
+
+\usepackage{tikzlings}
+\usepackage{tikzducks}
+
+\usepackage{array} % для столбцов фиксированной ширины
+\usepackage{verbatim} % для вставки комментариев
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+
+\allsectionsfont{\centering} % приказываем центрировать все sections
+
+\usepackage{amsmath,  amsfonts} % куча стандартных математических плюшек
+
+\usepackage[top=1.5cm,  left=1.5cm,  right=1.5cm,  bottom=1.5cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption} % подписи к картинкам без плавающего окружения figure
+
+\usepackage{comment} % длинные комментарии
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Теория вероятностей и статистика,  НИУ-ВШЭ}
+\chead{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{todonotes} % для вставки в документ заметок о том,  что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет картина Последний день Помпеи}
+% команда \listoftodos — печатает все поставленные \todo'шки
+
+\usepackage{booktabs} % красивые таблицы
+% заповеди из документации:
+% 1. Не используйте вертикальные линии
+% 2. Не используйте двойные линии
+% 3. Единицы измерения помещайте в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте,  а не говорите "то же"
+
+\usepackage{fontspec} % поддержка разных шрифтов
+\usepackage{polyglossia} % поддержка разных языков
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+\setmainfont{Linux Libertine O} % выбираем шрифт
+
+% можно также попробовать Helvetica,  Arial,  Cambria и т.Д.
+
+% чтобы использовать шрифт Linux Libertine на личном компе, 
+% его надо предварительно скачать по ссылке
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+% пояснение зачем нужно шаманство с \newfontfamily
+% http://tex.stackexchange.com/questions/91507/
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate,  2]{label=\asbuk*), ref=\asbuk*} % списки уровня 2 будут буквами а) б) \ldots 
+
+%% эконометрические и вероятностные сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\D}{Var}
+\newcommand \hb{\hat{\beta}}
+\newcommand \hs{\hat{\sigma}}
+\newcommand \htheta{\hat{\theta}}
+\newcommand \s{\sigma}
+\newcommand \hy{\hat{y}}
+\newcommand \hY{\hat{Y}}
+\newcommand \e{\varepsilon}
+\newcommand \he{\hat{\e}}
+\newcommand \hVar{\widehat{\Var}}
+\newcommand \hCorr{\widehat{\Corr}}
+\newcommand \hCov{\widehat{\Cov}}
+\newcommand \cN{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+%\fbox{
+%  \begin{minipage}{24em}
+%    Фамилия,  имя и номер группы (печатными буквами):\vspace*{3ex}\par
+%    \noindent\dotfill\vspace{2mm}
+%  \end{minipage}
+%  \begin{tabular}{@{}l p{0.8cm} p{0.8cm} p{0.8cm} p{0.8cm} p{0.8cm}@{}}
+% %\toprule
+% Задача & 1 & 2 & 3 & 4 & 5\\ 
+% \midrule
+% Балл  &  &  & & & \\
+% \midrule
+% %\bottomrule
+% \end{tabular}
+% }    
+
+
+\begin{document}
+
+\fbox{
+  \begin{minipage}{24em}
+    Фамилия, имя, отчество (печатными буквами):\vspace*{3ex}\par
+    \noindent\dotfill\vspace{2mm} \\
+     Фамилия семинариста:\vspace*{3ex}\par
+    \noindent\dotfill\vspace{2mm}
+  \end{minipage}
+  \begin{tabular}{@{}l p{0.8cm} p{0.8cm} p{0.8cm} p{0.8cm} p{0.8cm}@{}}
+%\toprule
+Задача & 1 & 2 & 3 & 4 & 5\\ 
+\midrule
+ &  &  & & &\\
+Балл  &  &  & & & \\
+\midrule
+%\bottomrule
+\end{tabular}
+}    
+
+\newpage
+\text{ }
+\newpage
+\text{ }
+\newpage
+\text{ }
+\newpage
+
+\lfoot{15 октября 2022 года, 102 года со дня рождения Марио Пьюзо}
+\rhead{вариант $\aleph_0$}
+\rfoot{\thepage/2}
+
+
+\setcounter{page}{1}
+
+\begin{minipage}{0.6\textwidth}
+\begin{quote}
+    Оставь пистолет. Захвати пирожные. 
+\end{quote}
+\begin{flushright}
+    \textit{Марио Пьюзо, Крёстный отец}
+\end{flushright}
+\end{minipage}
+
+
+\begin{enumerate}
+\item Вито и Дженко открыли компанию по импорту оливкового масла. 
+Они получили $X$ литров масла и разливают его поровну по $N+1$ вместительным бутылкам. 
+Величины $X$ и $N$ независимы, $X$ имеет экспоненциальное распределение с ожиданием 10 литров,
+а $N$ — пуассоновское распределение с ожиданием $9$ бутылок. 
+
+\begin{enumerate}
+    % \item Найдите вероятность в каждой бутылке будет ровно литр масла. 
+    \item {[5]} Найдите вероятность того, что в каждой бутылке будет меньше либо равно литра масла,
+    если число бутылок $N + 1$ равно трем.
+    \item {[5]} Найдите вероятность того, что в каждой бутылке будет меньше либо равно литра масла, 
+    если число бутылок $N + 1$ оказалось не больше трех. 
+    \item {[5]} Найдите $F(1)$, если $F$ — функция распределения количества масла в каждой бутылке.
+\end{enumerate}
+
+
+\item На праздник ровно $5\%$ жён итальянских мафиози получили в подарок цветы. 
+Цветы получают в подарок только от мужа. 
+Также известно, что $0.5\%$ жён получили в подарок пирожные,
+причём половина жён получила их от мужа, а половина — от брата.
+Среди жён, получивших пирожные от мужа, $90\%$ получили в подарок цветы. 
+Среди жён, получивших пирожные от брата, $5\%$ получили в подарок цветы.
+
+\begin{enumerate}
+    \item {[5]} Кармела получила в подарок цветы. 
+    Какова условная вероятность того, что она получила пирожные в подарок от мужа?
+    \item {[10]} Талия получила в подарок цветы и пирожные. 
+    Какова условная вероятность того, что она получила пирожные в подарок от мужа?
+\end{enumerate}
+
+
+\item В особняке дона Вито Корлеоне собрались в круг $n>2$ гостей. 
+У двоих из гостей есть по теннисному мячу. 
+Одновременно и независимо друг от друга эти двое бросают свои мячи случайно выбираемым гостям. 
+Если мячи были брошены одному гостю, то он объявляется преемником Крёстного отца. 
+Если мячи были брошены разным гостям, то новые раунды бросков продолжаются по тем же правилам. 
+Обозначим буквой $X$ количество раундов, которое потребуется для определения преемника. 
+
+\begin{enumerate}
+    \item {[5]} Найдите вероятность $\P(X = 2)$. 
+    \item {[5]} Найдите функцию распределения величины $Y = \min\{X, 3\}$.
+    \item {[5]} За сколько раундов в среднем будет определён преемник?
+\end{enumerate}
+
+\newpage
+
+\item Количество глав семей, $X$, собранных доном Корлеоне для переговоров, имеет производящую вероятности функцию 
+\[
+g(t) = 0.2 t + 0.3 t^2 + 0.5 t^3.    
+\]
+\begin{enumerate}
+    \item {[5]} Постройте график функции распределения величины $X$. 
+    \item {[5]} Найдите $g'(1)$ и объясните, какой смысл имеет величина $g'(1)$ для произвольной функции производящей вероятности.
+\end{enumerate}
+
+\item Чтобы уйти от преследования, консильери хочет сесть в первый попавшийся автобус. 
+На остановку приходят автобусы трёх маршрутов, $A$, $B$ и $C$. 
+Интервалы между автобусами каждого маршрута равны ровно пяти минутам. 
+Автобусы разных маршрутов приходят независимо друг от друга. 
+Обозначим буквой $T$ время ожидания консильери на остановке в минутах.
+
+\begin{enumerate}
+    \item {[5]} Найдите вероятность $\P(T \leq 1)$.
+    \item {[5]} Найдите функцию плотности и функцию распределения $T$.
+    \item {[5]} Найдите ожидание $\E(T)$.
+\end{enumerate}
+
+% \item Консильери подкидывает правильную монетку до тех пор, пока не выпадет $HTH$. 
+% Найдите ожидаемое число подбрасываний. 
+
+
+% \item {[бонусный вопрос]} Какой день какого месяца был вчера в Италии в 1582 году?
+% 4 октября, даты с 5 по 14 октября отсутствовали из-за введения папой Григорием нового календаря
+
+\end{enumerate}
+
+
+\end{document}
